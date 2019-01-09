@@ -1,0 +1,59 @@
+## Setting up routes with React Router using the `Route` component
+
+Getting started with React Router is simple. To do so, we install the package, wrapper our `App` component in `index.js` and import [the Route component](https://reacttraining.com/react-router/web/api/Route). Then, we set up our Routes by declaring what components will be mounted when certain URL paths are met. 
+
+In the terminal...
+
+```
+$ yarn add react-router-dom
+```
+
+In the index.js file...
+
+```
+import React from 'react'
+import { render } from 'react-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+import App from './components/App';
+
+render((
+  <Router>
+    <App />
+  </Router>
+), document.getElementById('root'));
+```
+
+In the App.js file...
+
+```
+import React from 'react'
+import { Route } from 'react-router-dom'
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        ...
+        // A user requests `/` so we will mount the `Home` component
+        <Route exact path="/" component={Home}/>
+        // A user requests `/about` so let us render the `About` component
+        <Route path="/about" component={About}/>
+        // A user requests `/contact` so we shall mount the `Contact` component
+        <Route path="/contact" component={Contact}/>
+      </div>
+    )
+  }
+}
+export default App
+
+```
+
+The Route component takes in two `props`:
+1. The `path` where the Route component will trigger when someone types in that `path` in the URL
+2. The `component` prop which is the component that you want React to mount when the URL matches the requested `path`.
+
+*Note* 
+
+By placing `exact` on a `<Route />` component you are saying that the specific path requested will be the only if the path matches exactly what was requested. This defaults to false, so by simply including the exact prop on your `Route` component it will set it to true and only mount our Home component when the specific path `/` is requested and not when `/about` is requested.
+
+`<Route exact path="/" component={Home}/>`
